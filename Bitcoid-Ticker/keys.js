@@ -1,2 +1,2 @@
-exports.PRIV_KEY = "ec8647b74c47215411466e38ca90709c792cec41";
-exports.API_KEY = "232fe54d65d5fd7fd310505e42544666";
+exports.PRIV_KEY = "xxx";
+exports.API_KEY = "xxx";
