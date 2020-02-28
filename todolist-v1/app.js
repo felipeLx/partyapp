@@ -37,6 +37,6 @@ app.get("/work", (req, res) => {
     res.render("list", {listTitle: "Work List", newListItems: workItems});
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("listen in port 3000");
 })
