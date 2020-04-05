@@ -1,0 +1,18 @@
+.Header {
+    background-color: #0F4C81;
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+.Cards {
+    width: 90%;
+    padding-top: 20px;
+    
+    justify-content: center;
+}
+
+.Card {
+    border: 2px solid white;
+    margin: 5px;
+    
+}

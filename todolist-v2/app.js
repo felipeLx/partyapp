@@ -2,10 +2,11 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
 const _ = require("lodash");
+const mongoose = require("mongoose");
 
-const password = require("password.js");
+
+const passwords = require(__dirname + "/password.js");
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -15,7 +16,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-mongoose.connect(`mongodb+srv://felipealisboa:${password}@cluster0-fqbok.mongodb.net/test?retryWrites=true&w=majority/todolistDB`, {
+const password = passwords.getPassword();
+
+mongoose.connect(`mongodb+srv://felipealisboa:${password}@cluster0-fqbok.mongodb.net/todolistDB`, {
     useUnifiedTopology: true,
     useNewUrlParser: true
   })
@@ -146,6 +149,11 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
+let port = process.env.PORT;
+if(port == null || port == "") {
+  port = 3000;
+}
+
+app.listen(port,() => {
+  console.log(`Server started on port: ${port}`);
 });
