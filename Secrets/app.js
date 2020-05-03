@@ -170,20 +170,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-    // bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-    //     const newUser = User({
-    //         email: req.body.username,
-    //         password: hash
-    //     });
-    
-    //     newUser.save((err) => {
-    //         if(err) {
-    //             console.log(err);
-    //         } else {
-    //             res.render("secrets");
-    //         }
-    //     });
-    // });
+
     User.register({username: req.body.username}, req.body.password, (err, user) => {
         if(err) {
             console.log(err);
@@ -198,22 +185,6 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    // const username = req.body.username;
-    // const password = req.body.password;
-
-    // User.findOne({email: username}, (err, foundUser) => {
-    //     if(err) {
-    //         console.log(err);
-    //     } else {
-    //         if(foundUser) {
-    //             // bcrypt.compare(password, foundUser.password, (err, result) => {
-    //                 if(result === true) {
-    //                     res.render("secrets");
-    //                 }
-    //             }
-    //         }
-    //     }
-    // );
     const user = new User({
         username: req.body.userName,
         password: req.body.password
