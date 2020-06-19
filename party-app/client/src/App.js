@@ -1,15 +1,15 @@
 import React, { Suspense, useEffect } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import { connect, Provider } from 'react-redux';
-import jwt_decode from "jwt-decode";
-import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./store/actions/authAction";
+import { connect } from 'react-redux';
+// import jwt_decode from "jwt-decode";
+// import setAuthToken from "./utils/setAuthToken";
+// import { setCurrentUser, logoutUser } from "./store/actions/authAction";
 import Users from './components/Users/Users';
 import Layout from './hoc/Layout/Layout';
 import Logout from './containers/Auth/Logout/Logout';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import * as actions from './store/actions/index';
-import store from "./store";
+// import store from "./store";
 
 const Auth = React.lazy(() => {
   return import ('./containers/Auth/Auth');
@@ -39,23 +39,23 @@ const Places = React.lazy(() => {
   return import ('./components/Places/Places');
 });
 
-if (localStorage.jwtToken) {
-  // Set auth token header auth
-  const token = localStorage.jwtToken;
-  setAuthToken(token);
-  // Decode token and get user info and exp
-  const decoded = jwt_decode(token);
-  // Set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
-  // Check for expired token
-  const currentTime = Date.now() / 1000; // to get in milliseconds
-  if (decoded.exp < currentTime) {
-    // Logout user
-    store.dispatch(logoutUser());
-    // Redirect to login
-    window.location.href = "./login";
-  }
-}
+// if (localStorage.jwtToken) {
+//   // Set auth token header auth
+//   const token = localStorage.jwtToken;
+//   setAuthToken(token);
+//   // Decode token and get user info and exp
+//   const decoded = jwt_decode(token);
+//   // Set user and isAuthenticated
+//   // store.dispatch(setCurrentUser(decoded));
+//   // Check for expired token
+//   const currentTime = Date.now() / 1000; // to get in milliseconds
+//   if (decoded.exp < currentTime) {
+//     // Logout user
+//     // store.dispatch(logoutUser());
+//     // Redirect to login
+//     window.location.href = "./login";
+//   }
+// }
 const app = React.memo(props => {
   const {onTryAutoSignup} = props;
 
@@ -70,8 +70,6 @@ const app = React.memo(props => {
         <Route path="/auth" render={props => <Auth {...props} />} />
         <Route path="/login" render={props => <Login {...props} />} />
         <Route path="/about" render={props => <AboutUs {...props} />} />
-        <Route path="/services" render={props => <Services {...props} />} />
-        <Route path="/places" render={props => <Places {...props} />} />
         <Route path="/:id" render={props => <User {...props} />} />
         <Route path="/" exact render={props => <Users {...props} />} />
         <Redirect to="/" />

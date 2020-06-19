@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import classnames from "classnames";
-import { registerUser } from "../../store/actions/authAction";
+// import { registerUser } from "../../store/actions/authAction";
 import Register from '../../components/Register/Register';
 
 const login = React.memo(props => {
@@ -15,16 +15,16 @@ const login = React.memo(props => {
 
     const [authenticated, setAuthenticated] = useState(false);
 
-    useEffect((nextProps) => {
-      console.log(nextProps);
+    useEffect(() => {
+      // console.log(nextProps);
       console.log(props);
       
-      if (nextProps.auth.isAuthenticated) {
-        props.history.push("/register" + props.match.params.id);
+      if (props.auth.userId) {
+        props.history.push("/");
       }
-      if (nextProps.errors) {
+      if (props.auth.errors) {
         setUser({
-          errors: nextProps.errors
+          errors: props.auth.errors
         });
       }
 
@@ -35,10 +35,11 @@ const login = React.memo(props => {
     };
 
     const submitHandler = (event) => {
+      console.log(props);
         event.preventDefault();
         setAuthenticated(true);
         const userData = { username: user.username, password: user.password};
-        props.loginUser(userData);
+        props.auth.userId(userData);
     };
 
     return (
@@ -57,7 +58,8 @@ const login = React.memo(props => {
                 Ainda não tem uma conta? <Link to="/auth">Registrar</Link>
               </p>
             </div>
-            <form noValidate onSubmit={submitHandler}>
+            <form action="/login" method="POST" noValidate onSubmit={submitHandler}>  
+            
               <div className="input-field col s12">
                 <input
                   onChange={inputChangedHandler}
@@ -65,6 +67,8 @@ const login = React.memo(props => {
                   error={user.errors}
                   id="email"
                   type="email"
+                  name="email"
+
                   
                 />
                 <label htmlFor="email">Email</label>
@@ -77,6 +81,7 @@ const login = React.memo(props => {
                   error={user.errors}
                   id="password"
                   type="password"
+                  name="password"
                  
                 />
                 <label htmlFor="password">Password</label>

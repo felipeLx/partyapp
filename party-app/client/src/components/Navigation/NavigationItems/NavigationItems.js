@@ -10,12 +10,7 @@ const navigationItems = React.memo((props) => {
     return(
     <ul className="NavigationItems">
         <NavigationItem link="/">PartyApp</NavigationItem>
-        {!props.isAuthenticated ?
-            <NavigationItem link="/service">Serviços</NavigationItem>  
-            : null }
-        {!props.isAuthenticated ?
-            <NavigationItem link="/places">Lugares</NavigationItem>
-            : null }
+
         {!props.isAuthenticated ?
             <NavigationItem link="/about">Sobre Nós</NavigationItem>
             : null }

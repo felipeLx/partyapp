@@ -21,11 +21,11 @@ export function* authUserSaga(action) {
         const authData = {
             email: action.email,
             password: action.password,
-            returnSecureToken: true
+            // returnSecureToken: true
         };
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyACmBSN1k_Uhyn_789r5gmM0xd0dL2VdGE';
+        let url = '/register';
         if(!action.isSignUp) {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyACmBSN1k_Uhyn_789r5gmM0xd0dL2VdGE';
+            url = '/auth';
         }
         try{
         const response = yield axios.post(url, authData)

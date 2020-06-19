@@ -14,12 +14,12 @@ export const getUserById = id => api.get(`/register/${id}`);
 
 const apis = {
     insertUser,
+    loginUser,
     getAllUsers,
     getOneUser,
     updateUserById,
     deleteUserById,
-    getUserById,
-    loginUser
+    getUserById
 }
 
 export default apis;
